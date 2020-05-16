@@ -24,12 +24,13 @@ const CheckoutForm = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-testid="form">
         <h2>Checkout Form</h2>
         <label>
           First Name:
           <input
             name="firstName"
+            aria-label="firstName"
             value={values.firstName}
             onChange={e => handleChanges(e.target.name, e.target.value)}
           />
@@ -38,6 +39,7 @@ const CheckoutForm = (props) => {
           Last Name:
           <input
             name="lastName"
+            aria-label="lastName"
             value={values.lastName}
             onChange={e => handleChanges(e.target.name, e.target.value)}
           />
@@ -46,6 +48,7 @@ const CheckoutForm = (props) => {
           Address:
           <input
             name="address"
+            aria-label="address"
             value={values.address}
             onChange={e => handleChanges(e.target.name, e.target.value)}
           />
@@ -53,7 +56,8 @@ const CheckoutForm = (props) => {
         <label>
           City:
           <input 
-            name="city" 
+            name="city"
+            aria-label="city"
             value={values.city} 
             onChange={e => handleChanges(e.target.name, e.target.value)} 
           />
@@ -61,7 +65,8 @@ const CheckoutForm = (props) => {
         <label>
           State:
           <input 
-            name="state" 
+            name="state"
+            aria-label="state" 
             value={values.state} 
             onChange={e => handleChanges(e.target.name, e.target.value)}
           />
@@ -69,7 +74,8 @@ const CheckoutForm = (props) => {
         <label>
           Zip:
           <input 
-            name="zip" 
+            name="zip"
+            aria-label="zip"
             value={values.zip} 
             onChange={e => handleChanges(e.target.name, e.target.value)}
           />
