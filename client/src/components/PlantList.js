@@ -18,7 +18,6 @@ export default class PlantList extends Component {
 
   async componentDidMount() {
     let plants = await axios.get(API_URL_PLANTS);
-    console.log(plants)
     this.setState({ plants: [...plants.data.plantsData] });
   }
 
