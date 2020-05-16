@@ -1,12 +1,26 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+const API_URL_PLANTS = 'http://localhost:3333/plants'
+
 export default class PlantList extends Component {
   // add state with a property called "plants" - initialize as an empty array
+  constructor() {
+    super();
+    this.state = {
+      plants: []
+    }
+  }
 
   // when the component mounts:
   //   - fetch data from the server endpoint - http://localhost:3333/plants
   //   - set the returned plants array to this.state.plants
+
+  async componentDidMount() {
+    let plants = await axios.get(API_URL_PLANTS);
+    console.log(plants)
+    this.setState({ plants: [...plants.data.plantsData] });
+  }
 
   /*********  DON'T CHANGE ANYTHING IN THE RENDER FUNCTION *********/
   render() {
