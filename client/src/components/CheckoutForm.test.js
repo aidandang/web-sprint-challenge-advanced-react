@@ -2,62 +2,39 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import CheckoutForm from "./CheckoutForm";
 
-// Write up the two tests here and make sure they are testing what the title shows
-
-const setup = (label) => {
-  const utils = render(<CheckoutForm />)
-  const input = utils.getByLabelText(label)
-  return {
-    input,
-    ...utils,
-  }
-}
-
 test("form header renders", () => {
   const { getByText } = render(<CheckoutForm />);
-  const heading = getByText(/Checkout Form/i);
-  expect(heading).toBeInTheDocument();
+  const header = getByText(/Checkout Form/i);
+  expect(header).toBeInTheDocument();
 });
 
-test("form shows success message on submit with form details", () => {
-  const { input } = setup('firstName')
-  fireEvent.change(input, { target: { value: 'Aidan' } })
-  expect(input.value).toBe('Aidan')
-});
+test("form can be filled in and submitted", () => {
+  // arrange
+  const { getByLabelText, getByText, queryByTestId, queryByText } = render(<CheckoutForm />);
 
-test("form shows success message on submit with form details", () => {
-  const { input } = setup('lastName')
-  fireEvent.change(input, { target: { value: 'Dang' } })
-  expect(input.value).toBe('Dang')
-});
+  // act
+  const firstNameInput = getByLabelText(/first name/i);
+  const lastNameInput = getByLabelText(/last name/i);
+  const addressInput = getByLabelText(/address/i);
+  const cityInput = getByLabelText(/city/i);
+  const stateInput = getByLabelText(/state/i);
+  const zipInput = getByLabelText(/zip/i);
 
-test("form shows success message on submit with form details", () => {
-  const { input } = setup('address')
-  fireEvent.change(input, { target: { value: '123 Main St' } })
-  expect(input.value).toBe('123 Main St')
-});
 
-test("form shows success message on submit with form details", () => {
-  const { input } = setup('city')
-  fireEvent.change(input, { target: { value: 'Orange' } })
-  expect(input.value).toBe('Orange')
-});
+  fireEvent.change(firstNameInput, { target: { value: 'Aidan' } });
+  fireEvent.change(lastNameInput, { target: { value: 'Dang' } });
+  fireEvent.change(addressInput, { target: { value: '123 Main St.' } });
+  fireEvent.change(cityInput, { target: { value: 'City of Irvine' } });
+  fireEvent.change(stateInput, { target: { value: 'California' } });
+  fireEvent.change(zipInput, { target: { value: '00000' } });
 
-test("form shows success message on submit with form details", () => {
-  const { input } = setup('state')
-  fireEvent.change(input, { target: { value: 'California' } })
-  expect(input.value).toBe('California')
-});
-
-test("form shows success message on submit with form details", () => {
-  const { input } = setup('zip')
-  fireEvent.change(input, { target: { value: '00000' } })
-  expect(input.value).toBe('00000')
-});
-
-test("submits", () => {
-  const onSubmit = jest.fn();
-  const { getByTestId } = render(<CheckoutForm><form onSubmit={onSubmit} /></CheckoutForm>);
-  fireEvent.click(getByTestId("form"));
-  expect(onSubmit).toHaveBeenCalled();
+  const button = getByText("Checkout");
+  fireEvent.click(button);
+  expect(queryByTestId("successMessage")).toBeInTheDocument();
+  expect(queryByText(/aidan/i)).toBeInTheDocument();
+  expect(queryByText(/dang/i)).toBeInTheDocument();
+  expect(queryByText(/123 main st./i)).toBeInTheDocument();
+  expect(queryByText(/city of irvine/i)).toBeInTheDocument();
+  expect(queryByText(/california/i)).toBeInTheDocument();
+  expect(queryByText(/00000/i)).toBeInTheDocument();
 });
