@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useForm } from '../hooks/useForm';
 const initialValue = {
   firstName: "",
   lastName: "",
@@ -15,11 +15,7 @@ const initialValue = {
 
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [values, setValues] = useState(initialValue);
-
-  const handleChanges = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  const [values, setValues, handleChanges] = useForm(initialValue);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,43 +24,61 @@ const CheckoutForm = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-testid="form">
         <h2>Checkout Form</h2>
         <label>
           First Name:
           <input
             name="firstName"
+            aria-label="firstName"
             value={values.firstName}
-            onChange={handleChanges}
+            onChange={e => handleChanges(e.target.name, e.target.value)}
           />
         </label>
         <label>
           Last Name:
           <input
             name="lastName"
+            aria-label="lastName"
             value={values.lastName}
-            onChange={handleChanges}
+            onChange={e => handleChanges(e.target.name, e.target.value)}
           />
         </label>
         <label>
           Address:
           <input
             name="address"
+            aria-label="address"
             value={values.address}
-            onChange={handleChanges}
+            onChange={e => handleChanges(e.target.name, e.target.value)}
           />
         </label>
         <label>
           City:
-          <input name="city" value={values.city} onChange={handleChanges} />
+          <input 
+            name="city"
+            aria-label="city"
+            value={values.city} 
+            onChange={e => handleChanges(e.target.name, e.target.value)} 
+          />
         </label>
         <label>
           State:
-          <input name="state" value={values.state} onChange={handleChanges} />
+          <input 
+            name="state"
+            aria-label="state" 
+            value={values.state} 
+            onChange={e => handleChanges(e.target.name, e.target.value)}
+          />
         </label>
         <label>
           Zip:
-          <input name="zip" value={values.zip} onChange={handleChanges} />
+          <input 
+            name="zip"
+            aria-label="zip"
+            value={values.zip} 
+            onChange={e => handleChanges(e.target.name, e.target.value)}
+          />
         </label>
         <button>Checkout</button>
       </form>

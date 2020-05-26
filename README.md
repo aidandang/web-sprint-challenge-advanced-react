@@ -30,13 +30,51 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 1. Explain how to build stateful class components.
 
+ANSWER: 
+This is the way to build a React component by using class. We start with class which is extended from React Component Class as a parent and child classes. We then use constructor method to initiate some data and set states. We then call render() method to show content to the screen.
+
 2. Describe the different phases of the component lifecycle.
+
+ANSWER:
+  1. Birth/Mounting Phase:
+
+  This is the phase when the component is being built out from the ground up where initial data will be defined in the constructor.
+  - Render method is invoked
+  - componentDidMount get called.
+
+  2. Growth/Update Phase:
+  This is the phase when component data is updated including props, setState and forceUpdate changed.
+  - shouldComponentUpdate method could be used to stop a component from calling render if needed.
+  - componentDiDUpdate method could be used at the last of this phase.
+
+  3. Death/Un-mounting Phase
+  This is the phase to remove the component from the screen.
+  - componentWillUnmount is called and can be used for any clean up jobs.
 
 3. Demonstrate an understanding of class component lifecycle methods.
 
+ANSWER:
+
+- constructor(): where all initial data will be defined using 'this' to represent this class and the key such 'this.name'
+- render(): is a blood of all react class component. It is used to build UI to show on the screen. It tell React to return some piece of DOM
+- componentDidMount(): is a method to be called at the last of Birth/Mounting Phase.
+- componentDidUpdate(): this is similar to componentDidMount which to be called at the last of Growth/Update Phase.
+- componentWillUnmount(): is called for any clean up jobs such as event of mouse clicking which was called in the component and keep being trigger until componentWillUnmount method stops it.
+
+
 4. Define stateful logic.
 
+ANSWER:
+Stateful logic is logic that is built into a component. It can be a function that handles a click event or maybe a function that sets toggle state, or even a function that formats data before it gets displayed. Usually, this kind of logic deals with state in the component. Thus the moniker “stateful logic.”
+
+
 5. Describe how to test a React component with React Testing Library.
+
+ANSWER:
+The framework we use for testing is: arrange, act, assert. These are three steps that we can take to build good tests. 
+- First, we “arrange” our test by setting up our code such that it can be tested. 
+- Then, we “act” - calling a method or function that returns a result of interest to our test. 
+- Finally, with that return we “assert” if our expected return matched the actual return.
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
